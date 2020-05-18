@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: ApiGateway
+server:
+  port: 9200
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka
+zuul:
+  routes:
+    customer-management:
+      path: /api/user
+      serviceId: customermanagement
+    customer-management1:
+      path: /api/user/**
+      serviceId: customermanagement

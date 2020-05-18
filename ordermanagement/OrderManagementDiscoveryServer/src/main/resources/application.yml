@@ -1,0 +1,69 @@
+spring:
+  profiles: default
+  application:
+    name: EurekaServer
+server:
+  port: 8760
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
+---
+spring:
+  profiles: peer1
+  application:
+    name: EurekaServer-Clustered
+server:
+  port: 8671
+eureka:
+  instance:
+    hostname: peer1-server.com
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka
+---
+spring:
+  profiles: peer2
+  application:
+    name: EurekaServer-Clustered
+server:
+  port: 8672
+eureka:
+  instance:
+    hostname: peer2-server.com
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://peer1-server.com:8671/eureka,http://peer3-server.com:8673/eureka
+---
+spring:
+  profiles: peer3
+  application:
+    name: EurekaServer-Clustered
+server:
+  port: 8673
+eureka:
+  instance:
+    hostname: peer3-server.com
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka
+
+
+
