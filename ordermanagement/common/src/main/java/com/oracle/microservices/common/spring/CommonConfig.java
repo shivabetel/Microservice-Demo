@@ -1,8 +1,19 @@
 package com.oracle.microservices.common.spring;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import com.oracle.microservices.common.web.FeignExceptionHandler;
+import com.oracle.microservices.common.web.RestResponseEntityExceptionHandler;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 
-@EntityScan("com.oracle.microservices.common.entities")
+@PropertySource("classpath:persistence-mysql-local.properties")
+@Import(RestResponseEntityExceptionHandler.class)
+@Configuration
 public class CommonConfig {
+
+    @Bean
+    public FeignExceptionHandler feignErrorDecoder(){
+        return new FeignExceptionHandler();
+    }
 }

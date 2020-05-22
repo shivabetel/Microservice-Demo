@@ -2,7 +2,7 @@ package com.oracle.microservices.common.web;
 
 
 import com.oracle.microservices.common.web.exception.ResourceNotFoundException;
-import com.oracle.microservices.common.web.model.ErrorDTO;
+import com.oracle.microservices.common.web.dtos.ErrorDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setResponseCode(String.valueOf(HttpStatus.BAD_REQUEST.value()));
         errorDTO.setResponseMessage(ex.getMessage());
-        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
 

@@ -1,4 +1,4 @@
-package com.oracle.microservices.common.web.model;
+package com.oracle.microservices.common.web.dtos;
 
 
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.oracle.microservices.common.entities;
+package com.oracle.microservices.common.persistence.entities;
 
 
 import com.oracle.microservices.common.interfaces.IEntity;

@@ -1,4 +1,4 @@
-package com.oracle.microservices.customermanagment.web.model;
+package com.oracle.microservices.common.web.dtos;
 
 
 import com.oracle.microservices.common.interfaces.IDto;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddressDto implements IDto {
+public class AddressDTO implements IDto {
 
     private String addressLine1;
     private String addressLine2;
@@ -16,10 +16,10 @@ public class AddressDto implements IDto {
     private String state;
     private String country;
 
-    public AddressDto() {
+    public AddressDTO() {
     }
 
-    public AddressDto(String addressLine1, String addressLine2, Integer pincode, String city, String state, String country) {
+    public AddressDTO(String addressLine1, String addressLine2, Integer pincode, String city, String state, String country) {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.pincode = pincode;

@@ -1,11 +1,11 @@
-package com.oracle.microservices.authenticationservice.web.model.ApplicationUser;
+package com.oracle.microservices.common.web.dtos;
 
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class ApplicationUser {
+public class ApplicationUserDTO {
 
     private String userName;
     private String password;
