@@ -1,7 +1,7 @@
 package com.oracle.microservices.customermanagment.service.impl;
 
 import com.oracle.microservices.commontest.service.AbstractServiceIntegrationTest;
-import com.oracle.microservices.common.entities.User;
+import com.oracle.microservices.customermanagment.persistence.model.User;
 import com.oracle.microservices.customermanagment.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +17,6 @@ class UserServiceImplTest extends AbstractServiceIntegrationTest<User, Long> {
 
     @Override
     protected User createEntity() {
-        return new User("shiva.betel@gmail.com", "password");
+        return new User("shiva.betel@gmail.com", "password", "shivakumar", "GM");
     }
 }

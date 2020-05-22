@@ -40,11 +40,11 @@ public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDTO> {
     private UserDTO createDto(User entity) {
 
         return new UserDTO(entity.getId().toString(),
-                entity.getEmailId(),
-                entity.getPassword(),
-                entity.getFirstName(),
-                entity.getLastName(),
-                entity.getShippingAddresses()
+                        entity.getEmailId(),
+                        entity.getPassword(),
+                        entity.getFirstName(),
+                        entity.getLastName(),
+                        entity.getShippingAddresses()
                         .stream()
                         .map(addressEntityToDto)
                         .collect(Collectors.toList()));
