@@ -1,0 +1,16 @@
+/ordermanagement/OrderManagementApiGateway/OrderManagementApiGateway.iml
+/ordermanagement/OrderManagementApiGateway/target/
+/ordermanagement/OrderManagementDiscoveryServer/OrderManagement-DiscoveryServer.iml
+/ordermanagement/OrderManagementDiscoveryServer/target/
+/ordermanagement/common/common.iml
+/ordermanagement/common/target/
+/ordermanagement/commontest/commontest.iml
+/ordermanagement/commontest/target/
+/ordermanagement/customermanagement/customermanagement.iml
+/ordermanagement/customermanagement/target/
+/ordermanagement/customerordermanagement/customerordermanagement.iml
+/ordermanagement/customerordermanagement/target/
+/ordermanagement/ordermanagement.iml
+/ordermanagement/.idea/
+ordermanagement/authenticationservice/authentication-service.iml
+ordermanagement/authenticationservice/target/

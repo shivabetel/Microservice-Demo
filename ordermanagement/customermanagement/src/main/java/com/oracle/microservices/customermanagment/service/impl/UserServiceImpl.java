@@ -2,7 +2,7 @@ package com.oracle.microservices.customermanagment.service.impl;
 
 import com.oracle.microservices.common.web.exception.BusinessException;
 import com.oracle.microservices.customermanagment.persistence.dao.IUserJpaDao;
-import com.oracle.microservices.common.entities.User;
+import com.oracle.microservices.customermanagment.persistence.model.User;
 import com.oracle.microservices.customermanagment.service.IUserService;
 import com.oracle.microservices.common.service.AbstractService;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.oracle.microservices.common.persistence.entities;
+package com.oracle.microservices.customermanagment.persistence.model;
 
 import com.oracle.microservices.common.interfaces.IEntity;
 import lombok.Getter;

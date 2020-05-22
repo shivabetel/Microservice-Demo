@@ -1,9 +1,9 @@
 package com.oracle.microservices.customermanagment.web.mappers;
 
-import com.oracle.microservices.common.entities.ShippingAddress;
-import com.oracle.microservices.common.entities.User;
-import com.oracle.microservices.customermanagment.web.model.AddressDto;
-import com.oracle.microservices.customermanagment.web.model.UserDto;
+import com.oracle.microservices.customermanagment.persistence.model.ShippingAddress;
+import com.oracle.microservices.customermanagment.persistence.model.User;
+import com.oracle.microservices.common.web.dtos.AddressDTO;
+import com.oracle.microservices.common.web.dtos.UserDTO;
 import com.oracle.microservices.common.interfaces.IEntityDtoMapper;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 
 @Component
-public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDto> {
+public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDTO> {
 
-    private static Function<ShippingAddress, AddressDto> addressEntityToDto = (shippingAddress) -> (
-            new AddressDto(shippingAddress.getAddressLine1(),
+    private static Function<ShippingAddress, AddressDTO> addressEntityToDto = (shippingAddress) -> (
+            new AddressDTO(shippingAddress.getAddressLine1(),
                     shippingAddress.getAddressLine2(),
                     shippingAddress.getPincode(),
                     shippingAddress.getCity(),
@@ -23,7 +23,7 @@ public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDto> {
                     shippingAddress.getCountry())
     );
 
-    private static Function<AddressDto, ShippingAddress> addressDtoToEntityMapper = (address) -> (
+    private static Function<AddressDTO, ShippingAddress> addressDtoToEntityMapper = (address) -> (
             new ShippingAddress(address.getAddressLine1(),
                     address.getAddressLine2(),
                     address.getPincode(),
@@ -32,14 +32,18 @@ public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDto> {
     );
 
     @Override
-    public UserDto fromEntityToDto(User entity) {
+    public UserDTO fromEntityToDto(User entity) {
 
-         return entity != null ? this.createDto(entity) : null;
+        return entity != null ? this.createDto(entity) : null;
     }
 
-    private UserDto createDto(User entity) {
+    private UserDTO createDto(User entity) {
 
-        return new UserDto(entity.getEmailId(),
+        return new UserDTO(entity.getId().toString(),
+                entity.getEmailId(),
+                entity.getPassword(),
+                entity.getFirstName(),
+                entity.getLastName(),
                 entity.getShippingAddresses()
                         .stream()
                         .map(addressEntityToDto)
@@ -47,12 +51,12 @@ public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDto> {
     }
 
     @Override
-    public User fromDtoToEntity(UserDto dto) {
-          return  dto != null ? createEntity(dto) : null;
+    public User fromDtoToEntity(UserDTO dto) {
+        return dto != null ? createEntity(dto) : null;
     }
 
-    private User createEntity(UserDto dto) {
-        User user = new User(dto.getEmailId(), dto.getPassword());
+    private User createEntity(UserDTO dto) {
+        User user = new User(dto.getEmailId(), dto.getPassword(), dto.getFirstName(), dto.getLastName());
         user.setShippingAddresses(dto.getShippingAddress().stream().map(addressDtoToEntityMapper).collect(Collectors.toList()));
         return user;
     }
