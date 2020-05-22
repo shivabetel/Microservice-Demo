@@ -1,11 +1,11 @@
 package com.oracle.microservices.customermanagment.web.controller;
 
-import com.oracle.microservices.common.interfaces.IEntityDtoMapper;
-import com.oracle.microservices.common.web.controller.AbstractController;
-import com.oracle.microservices.common.web.dtos.UserDTO;
-import com.oracle.microservices.common.web.exception.ResourceNotFoundException;
 import com.oracle.microservices.customermanagment.persistence.model.User;
 import com.oracle.microservices.customermanagment.service.IUserService;
+import com.oracle.microservices.common.web.dtos.UserDTO;
+import com.oracle.microservices.common.interfaces.IEntityDtoMapper;
+import com.oracle.microservices.common.web.controller.AbstractController;
+import com.oracle.microservices.common.web.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

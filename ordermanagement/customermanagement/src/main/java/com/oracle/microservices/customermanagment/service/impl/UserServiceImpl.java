@@ -5,6 +5,7 @@ import com.oracle.microservices.customermanagment.persistence.dao.IUserJpaDao;
 import com.oracle.microservices.customermanagment.persistence.model.User;
 import com.oracle.microservices.customermanagment.service.IUserService;
 import com.oracle.microservices.common.service.AbstractService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,8 +15,11 @@ public class UserServiceImpl extends AbstractService<User, Long> implements IUse
 
     private IUserJpaDao dao;
 
-    public UserServiceImpl(IUserJpaDao userJpaDao) {
+    private PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(IUserJpaDao userJpaDao, PasswordEncoder passwordEncoder) {
         this.dao = userJpaDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -29,6 +33,8 @@ public class UserServiceImpl extends AbstractService<User, Long> implements IUse
         if(existingUser.isPresent()){
             throw new BusinessException("User already exists with the email id "+entity.getEmailId());
         }
+
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 
         return super.save(entity);
     }
