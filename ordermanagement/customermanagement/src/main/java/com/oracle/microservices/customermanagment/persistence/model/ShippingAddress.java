@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(schema = "ordermanagment",name = "SHIPPING_ADDRESS")
 @Getter
@@ -34,9 +35,8 @@ public class ShippingAddress implements IEntity {
     @Column(name = "COUNTRY", nullable = false)
     private String country;
 
-//    @ManyToOne
-//    @JoinColumn(name = "USER_ID")
-//    private User user;
+    @Column(name = "CUSTOMER_ID")
+    private Long customerId;
 
     public ShippingAddress() {
 
