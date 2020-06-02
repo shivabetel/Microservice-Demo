@@ -6,4 +6,5 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka
+      defaultZone: ${eureka.server}
+      #defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka

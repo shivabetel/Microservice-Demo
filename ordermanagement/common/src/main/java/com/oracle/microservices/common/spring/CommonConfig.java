@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("classpath:persistence-mysql-local.properties")
+@PropertySource("classpath:persistence-mysql-swarm.properties")
 @Import(RestResponseEntityExceptionHandler.class)
 @Configuration
 public class CommonConfig {

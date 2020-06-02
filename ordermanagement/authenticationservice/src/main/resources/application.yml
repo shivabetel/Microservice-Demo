@@ -1,0 +1,18 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: LoginService
+#feign:
+#  client:
+#    config:
+#      default:ss
+#        connectTimeout: 160000000
+#        readTimeout: 160000000
+#http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${eureka.server}
