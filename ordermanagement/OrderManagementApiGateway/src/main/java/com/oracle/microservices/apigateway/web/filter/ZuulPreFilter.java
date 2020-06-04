@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 public class ZuulPreFilter extends ZuulFilter {
 
-    private static List<String> nonProtectedresource = Arrays.asList("/api/login", "/api/user");
+    private static List<String> nonProtectedresource = Arrays.asList("/api/login", "/api/registration");
 
     private TokenValidationManager tokenValidationManager;
 

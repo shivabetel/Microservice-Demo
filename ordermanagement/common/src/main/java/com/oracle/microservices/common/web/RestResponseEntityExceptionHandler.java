@@ -1,6 +1,8 @@
 package com.oracle.microservices.common.web;
 
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.oracle.microservices.common.web.exception.OperationForbiddenException;
 import com.oracle.microservices.common.web.exception.ResourceNotFoundException;
 import com.oracle.microservices.common.web.dtos.ErrorDTO;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +31,22 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         errorDTO.setResponseCode(String.valueOf(HttpStatus.BAD_REQUEST.value()));
         errorDTO.setResponseMessage(ex.getMessage());
         return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {TokenExpiredException.class})
+    public ResponseEntity handleTokenExpired(Exception ex, WebRequest request) {
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setResponseCode(String.valueOf(HttpStatus.UNAUTHORIZED.value()));
+        errorDTO.setResponseMessage("Token is expired");
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
+
+    @ExceptionHandler(value = {OperationForbiddenException.class})
+    public ResponseEntity handleOperationForbiddenException(Exception ex, WebRequest request) {
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setResponseCode(String.valueOf(HttpStatus.FORBIDDEN.value()));
+        errorDTO.setResponseMessage(ex.getMessage());
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
 

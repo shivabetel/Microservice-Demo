@@ -8,6 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 @Component
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -21,7 +25,12 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         try{
             UserDTO user =  userService.findByEmailId(userId);
-            return new User(user.getEmailId(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCustomerId());
+            return new User(user.getEmailId(), user.getPassword(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getCustomerId(),
+                    user.getEmailId(),
+                    user.getShippingAddress());
 
         }catch (ResourceNotFoundException ex){
             throw new UsernameNotFoundException("User with email id "+userId+" doesn't exist");

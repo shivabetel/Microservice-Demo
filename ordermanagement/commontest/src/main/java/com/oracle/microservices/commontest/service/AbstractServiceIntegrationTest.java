@@ -23,7 +23,7 @@ public abstract class AbstractServiceIntegrationTest<T extends IEntity, E extend
    @Disabled
     protected void givenResourceExists_whenResourceIsRetrievedById_thenResourceIsFound(){
        T resource = createEntity();
-       getApi().save(resource);
+       getApi().create(resource);
        assertNotNull(getApi().findById((E) resource.getId()).orElseGet(() -> null));
     }
 

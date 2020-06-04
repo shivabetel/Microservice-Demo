@@ -7,4 +7,7 @@ public interface IEntityDtoMapper<T extends IEntity, E extends IDto> {
 
     T fromDtoToEntity(E dto);
 
+    T updateDtoToEntity(T entity, E dto);
+
+
 }

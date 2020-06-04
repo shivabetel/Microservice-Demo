@@ -10,7 +10,9 @@ public interface IOperations<T extends Serializable, E extends Serializable> {
 
     List<T> findAll();
 
-    T save(T entity);
+    T create(T entity);
+
+    void update(T entity);
 
     List<T> saveAll(Iterable<T> entities);
 

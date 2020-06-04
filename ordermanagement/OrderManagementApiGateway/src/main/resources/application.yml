@@ -6,15 +6,27 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka
+      defaultZone: ${eureka.server}
 zuul:
   routes:
     authenticate-service:
       path: /api/login
       serviceId: LoginService
     customer-management:
-      path: /api/user
+      path: customermanagement/**
       serviceId: customermanagement
-    customer-management1:
-      path: /api/user/**
-      serviceId: customermanagement
+      stripPrefix: true
+      sensitiveHeaders:
+#    customer-management1:
+#      path: /api/user/**
+#      serviceId: customermanagement,
+#      stripPrefix: false
+#      sensitiveHeaders:
+#    customer-management2:
+#      path: /api/registration
+#      serviceId: customermanagement,
+#      stripPrefix: false
+#    customer-management3:
+#      path: /api/registration/**
+#      serviceId: customermanagement,
+#      stripPrefix: false
