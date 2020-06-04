@@ -4,15 +4,19 @@ package com.oracle.microservices.customermanagment.web.controller;
 import com.oracle.microservices.common.interfaces.IEntityDtoMapper;
 import com.oracle.microservices.common.web.controller.AbstractController;
 import com.oracle.microservices.common.web.dtos.AddressDTO;
+import com.oracle.microservices.common.web.utils.TokenHelper;
 import com.oracle.microservices.customermanagment.persistence.model.ShippingAddress;
 import com.oracle.microservices.customermanagment.service.IShippingAddressService;
 import com.oracle.microservices.customermanagment.web.mappers.ShippingAddressEntityDtoMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/shippingAddress")
+@RequestMapping("/api/shippingAddress/{customerId}")
 public class ShippingAddressController extends AbstractController<ShippingAddress, Long, AddressDTO> {
 
 
@@ -25,12 +29,16 @@ public class ShippingAddressController extends AbstractController<ShippingAddres
     }
 
     @GetMapping
-    public List<AddressDTO> findAll(){
-        return this.findAllInternal();
+    public List<AddressDTO> findAllByCustomerId(@PathVariable("customerId") String customerId, @RequestHeader(name = "Authorization") String token){
+         token = token.replace("Bearer ", "");
+        Map userClaims = TokenHelper.getClaimsByKey("user", token);
+        return super.findByParentId(new Long(customerId));
     }
 
     @PostMapping
-    public AddressDTO save(@RequestBody AddressDTO shippingAddress) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public AddressDTO save(@RequestBody AddressDTO shippingAddress, @PathVariable("customerId") String customerId) {
+        shippingAddress.setCustomerId(customerId);
         return this.createOneInternal(shippingAddress);
     }
 

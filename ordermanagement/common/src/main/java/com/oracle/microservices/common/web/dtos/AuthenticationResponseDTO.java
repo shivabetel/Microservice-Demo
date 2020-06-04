@@ -9,4 +9,5 @@ import lombok.Setter;
 public class AuthenticationResponseDTO {
 
     private String authToken;
+    private UserDTO payload;
 }

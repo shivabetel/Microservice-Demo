@@ -1,8 +1,9 @@
 package com.oracle.microservices.authenticationservice.security.interfaces;
 
+import com.oracle.microservices.common.web.dtos.AuthenticationResponseDTO;
 import org.springframework.security.core.Authentication;
 
 public interface IAuthentication {
 
-    String authenticate(Authentication authentication);
+    AuthenticationResponseDTO authenticate(Authentication authentication);
 }

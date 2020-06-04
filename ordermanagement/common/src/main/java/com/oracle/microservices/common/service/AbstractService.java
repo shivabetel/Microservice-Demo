@@ -20,8 +20,18 @@ public abstract class AbstractService<T extends IEntity, E extends Serializable>
     }
 
     @Override
-    public T save(T entity) {
+    public T create(T entity) {
         return getDao().save(entity);
+    }
+
+    @Override
+    public void update(T entity) {
+        getDao().save(entity);
+    }
+
+    @Override
+    public List<T> findByParentId(E parentId) {
+        return getDao().findAll();
     }
 
     @Override

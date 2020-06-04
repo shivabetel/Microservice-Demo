@@ -28,7 +28,7 @@ public class UserServiceImpl extends AbstractService<User, Long> implements IUse
     }
 
     @Override
-    public User save(User entity){
+    public User create(User entity){
         Optional<User> existingUser =  getDao().findByEmailId(entity.getEmailId());
         if(existingUser.isPresent()){
             throw new BusinessException("User already exists with the email id "+entity.getEmailId());
@@ -36,8 +36,9 @@ public class UserServiceImpl extends AbstractService<User, Long> implements IUse
 
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 
-        return super.save(entity);
+        return super.create(entity);
     }
+
 
     @Override
     public IUserJpaDao getDao() {
