@@ -16,4 +16,7 @@ public interface IOperations<T extends Serializable, E extends Serializable> {
 
     List<T> saveAll(Iterable<T> entities);
 
+
+
+
 }

@@ -8,6 +8,7 @@ eureka:
     serviceUrl:
       defaultZone: ${eureka.server}
 zuul:
+  sensitive-headers:
   routes:
     authenticate-service:
       path: /api/login
@@ -15,8 +16,9 @@ zuul:
     customer-management:
       path: customermanagement/**
       serviceId: customermanagement
-      stripPrefix: true
-      sensitiveHeaders:
+    customer-ordermanagement:
+      path: customerordermanagement/**
+      serviceId: customerordermanagement
 #    customer-management1:
 #      path: /api/user/**
 #      serviceId: customermanagement,

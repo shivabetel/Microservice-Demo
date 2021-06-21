@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import com.oracle.microservices.apigateway.security.TokenValidationManager;
+import com.oracle.microservices.apigateway.security.interfaces.ITokenValidation;
 import com.oracle.microservices.apigateway.web.dto.AuthenticationResultDTO;
 import com.oracle.microservices.common.web.dtos.ErrorDTO;
 import org.springframework.http.HttpStatus;
@@ -20,12 +20,12 @@ import java.util.List;
 @Component
 public class ZuulPreFilter extends ZuulFilter {
 
-    private static List<String> nonProtectedresource = Arrays.asList("/api/login", "/api/registration");
+    private static List<String> nonProtectedresource = Arrays.asList("/api/login", "/api/registration", "/api/product");
 
-    private TokenValidationManager tokenValidationManager;
+    private ITokenValidation tokenValidation;
 
-    public ZuulPreFilter(TokenValidationManager tokenValidationManager) {
-        this.tokenValidationManager = tokenValidationManager;
+    public ZuulPreFilter(ITokenValidation tokenValidation) {
+        this.tokenValidation = tokenValidation;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ZuulPreFilter extends ZuulFilter {
         HttpServletRequest request = requestContext.getRequest();
         HttpServletResponse response = requestContext.getResponse();
         if(isProtectedResource(request.getRequestURI())){
-           AuthenticationResultDTO authenticationResultDTO =  tokenValidationManager.validateToken(request.getHeader("Authorization"));
+           AuthenticationResultDTO authenticationResultDTO =  tokenValidation.validateToken(request.getHeader("Authorization"));
             if(authenticationResultDTO.getUser() == null){
                 ErrorDTO dto = new ErrorDTO();
                 dto.setResponseCode(HttpStatus.UNAUTHORIZED.toString());

@@ -89,7 +89,9 @@ public class UserEntityDtoMapper implements IEntityDtoMapper<User, UserDTO> {
 
     private User createEntity(UserDTO dto) {
         User user = new User(dto.getEmailId(), dto.getPassword(), dto.getFirstName(), dto.getLastName());
-        user.setShippingAddresses(dto.getShippingAddress().stream().map(addressDtoToEntityMapper).collect(Collectors.toList()));
+        if(dto.getShippingAddress() != null) {
+            user.setShippingAddresses(dto.getShippingAddress().stream().map(addressDtoToEntityMapper).collect(Collectors.toList()));
+        }
         return user;
     }
 

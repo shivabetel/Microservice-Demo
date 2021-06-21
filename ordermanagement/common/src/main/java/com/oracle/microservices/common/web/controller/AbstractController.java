@@ -2,9 +2,13 @@ package com.oracle.microservices.common.web.controller;
 import com.oracle.microservices.common.interfaces.IDto;
 import com.oracle.microservices.common.interfaces.IEntity;
 import com.oracle.microservices.common.interfaces.IEntityDtoMapper;
+import com.oracle.microservices.common.search.ClientOperation;
 import com.oracle.microservices.common.service.interfaces.IService;
 import com.oracle.microservices.common.web.exception.ResourceNotFoundException;
+import org.apache.commons.lang3.tuple.Triple;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +16,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public abstract class AbstractController<T extends IEntity, E extends Serializable,  S extends IDto> {
+
+    @Autowired
+    HttpServletRequest httpServletRequest;
 
     protected final S findByIdInternal(E id){
         return getService().findById(id)
@@ -46,13 +53,23 @@ public abstract class AbstractController<T extends IEntity, E extends Serializab
         return Arrays.asList();
     }
 
-    protected final List<S> findByParentId(E parentId){
-        return getService().
-                findByParentId(parentId)
+    protected  final List<S> searchAllInternal(Triple<String, ClientOperation, String>... constraints){
+        return getService().searchAll(constraints)
                 .stream()
                 .map(getEntityToDtoMapper()::fromEntityToDto)
                 .collect(Collectors.toList());
+
     }
+
+    protected  final S searchOneInternale(Triple<String, ClientOperation, String>... constraints){
+        return getService().searchOne(constraints)
+                .map(getEntityToDtoMapper()::fromEntityToDto)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+
+    }
+
+
+
 
     protected final void updateInternal(E id, S dto){
       Optional<T> resource =  getService().findById(id);

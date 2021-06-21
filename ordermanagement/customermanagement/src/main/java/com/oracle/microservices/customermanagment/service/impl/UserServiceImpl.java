@@ -5,6 +5,7 @@ import com.oracle.microservices.customermanagment.persistence.dao.IUserJpaDao;
 import com.oracle.microservices.customermanagment.persistence.model.User;
 import com.oracle.microservices.customermanagment.service.IUserService;
 import com.oracle.microservices.common.service.AbstractService;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,8 @@ public class UserServiceImpl extends AbstractService<User, Long> implements IUse
         return getDao().findByEmailId(emailId);
     }
 
+
+
     @Override
     public User create(User entity){
         Optional<User> existingUser =  getDao().findByEmailId(entity.getEmailId());
@@ -42,6 +45,11 @@ public class UserServiceImpl extends AbstractService<User, Long> implements IUse
 
     @Override
     public IUserJpaDao getDao() {
+        return dao;
+    }
+
+    @Override
+    protected JpaSpecificationExecutor<User> getSpecificationExecutor() {
         return dao;
     }
 }

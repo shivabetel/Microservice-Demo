@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,6 +19,6 @@ public class UserDTO implements IDto {
     private String password;
     private String firstName;
     private String lastName;
-    private List<AddressDTO> shippingAddress;
+    private List<AddressDTO> shippingAddress = new ArrayList<>();
 
 }

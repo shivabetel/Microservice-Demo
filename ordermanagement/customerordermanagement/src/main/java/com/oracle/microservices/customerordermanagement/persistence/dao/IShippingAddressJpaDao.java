@@ -1,7 +1,7 @@
-package com.oracle.microservices.customermanagment.persistence.dao;
+package com.oracle.microservices.customerordermanagement.persistence.dao;
 
 import com.oracle.microservices.common.interfaces.dao.IJpaDao;
-import com.oracle.microservices.customermanagment.persistence.model.ShippingAddress;
+import com.oracle.microservices.customerordermanagement.persistence.model.ShippingAddress;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
