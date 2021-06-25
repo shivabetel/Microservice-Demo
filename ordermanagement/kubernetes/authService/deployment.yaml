@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication
+  labels:
+    app: authservice-microservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: authservice-app
+  template:
+    metadata:
+      labels:
+       app: authservice-app
+    spec:
+      containers:
+        - name: authservice-container
+          image: authenticationservice:0.0.1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+              name: http
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: native

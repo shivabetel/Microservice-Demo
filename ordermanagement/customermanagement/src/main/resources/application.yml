@@ -1,10 +1,17 @@
 spring:
   application:
     name: customermanagement
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: ${eureka.server}
-      #defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eureka
+  cloud:
+    consul:
+      discovery:
+        health-check-path: /api/health-check
+        health-check-interval: 20s
+server:
+  port: 8081
+#eureka:
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: ${eureka.server}
+      #defaultZone: http://peer1-server.com:8671/eureka,http://peer2-server.com:8672/eureka,http://peer3-server.com:8673/eurek

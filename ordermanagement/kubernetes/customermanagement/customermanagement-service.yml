@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customermanagement
+spec:
+  type: NodePort
+  selector:
+    app: customermanagement-app
+  ports:
+    - targetPort: 8081
+      port: 80

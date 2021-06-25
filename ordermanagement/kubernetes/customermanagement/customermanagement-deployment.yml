@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customermanagement
+  labels:
+    app: customermanagement-microservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: customermanagement-app
+  template:
+    metadata:
+      labels:
+        app: customermanagement-app
+    spec:
+      containers:
+        - name: customermanagement-container
+          image: customermanagement:0.0.1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8081
+
