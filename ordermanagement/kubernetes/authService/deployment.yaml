@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: authservice-container
-          image: authenticationservice:0.0.1
+          image: iad.ocir.io/idduo4nclxsd/authenticationservice:0.0.1
           imagePullPolicy: Never
           ports:
             - containerPort: 80
@@ -24,3 +24,5 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: native
+      imagePullSecrets:
+        - name: ocirsecret

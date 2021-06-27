@@ -16,8 +16,10 @@ spec:
     spec:
       containers:
         - name: customerordermanagement-container
-          image: customerordermanagement:0.0.1
+          image: iad.ocir.io/idduo4nclxsd/customerordermanagement:0.0.1
           imagePullPolicy: Never
           ports:
             - containerPort: 8083
               name: http
+      imagePullSecrets:
+        - name: ocirsecret
