@@ -2,6 +2,7 @@ package com.oracle.microservices.common.web;
 
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.oracle.microservices.common.web.exception.NotAuthorizedException;
 import com.oracle.microservices.common.web.exception.OperationForbiddenException;
 import com.oracle.microservices.common.web.exception.ResourceNotFoundException;
 import com.oracle.microservices.common.web.dtos.ErrorDTO;
@@ -47,6 +48,14 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         errorDTO.setResponseCode(String.valueOf(HttpStatus.FORBIDDEN.value()));
         errorDTO.setResponseMessage(ex.getMessage());
         return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+    }
+
+    @ExceptionHandler(value = {NotAuthorizedException.class})
+    public ResponseEntity handleNotAuthorizedException(Exception ex, WebRequest request) {
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setResponseCode(String.valueOf(HttpStatus.UNAUTHORIZED.value()));
+        errorDTO.setResponseMessage(ex.getMessage());
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
 

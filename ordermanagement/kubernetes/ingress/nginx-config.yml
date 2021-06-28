@@ -7,3 +7,4 @@ metadata:
     app.kubernetes.io/part-of: ingress-nginx
 data:
   ssl-redirect: "false"
+  no-auth-locations: /auth

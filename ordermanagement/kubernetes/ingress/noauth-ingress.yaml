@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ordermanagement-noauth-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /api/registration
+
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /customermanagement/api/registration
+            pathType: Prefix
+            backend:
+              serviceName: customermanagement
+              servicePort: 80
