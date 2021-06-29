@@ -21,7 +21,7 @@ public class ProductEntityDtoMapper implements IEntityDtoMapper<Product, Product
         return new ProductDTO(entity.getId().toString(),
                               entity.getName(),
                               entity.getDescription(),
-                              "http://localhost/images/"+entity.getId()+".png",
+                              "/images/"+entity.getId()+".png",
                               entity.getCategory().getId(),
                               String.valueOf(entity.getPrice()));
     }
